@@ -24,8 +24,16 @@ npm run dev
 Open a browser and navigate to the provided url. Default(http://localhost:3000)
 
 # Screenshots
+### Home page
 ![alt text](<screenshots/Screenshot from 2024-08-11 20-51-53.png>)
-![alt text](<screenshots/Screenshot from 2024-08-11 20-52-13.png>)
-![alt text](<screenshots/Screenshot from 2024-08-11 20-52-24.png>)
+
+### Go to joblist page
+![alt text](<screenshots/Screenshot from 2024-08-11 21-18-34.png>)
+![alt text](<screenshots/Screenshot from 2024-08-11 21-19-03.png>)
+
+### Click on one of the cards
+![alt text](<screenshots/Screenshot from 2024-08-11 21-19-14.png>)
+
+### It shows the description
 ![alt text](<screenshots/Screenshot from 2024-08-11 20-52-49.png>)
 ![alt text](<screenshots/Screenshot from 2024-08-11 20-52-56.png>)

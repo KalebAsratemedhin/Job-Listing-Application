@@ -40,7 +40,7 @@ const JobCard = ({jobPost, pic, jobId}: {jobPost: JobPost, pic: string, jobId: n
                 </p>
             </div>
             <div className="mt-4 flex gap-2">
-                <Tag text="text-green-tag" background="bg-green-tag" name="In Person" />
+                <div className="border-r-2 pr-3"><Tag primary="green" name="In Person" /></div>
                 <button className="font-heading rounded-full border px-4 border-my-yellow  hover:bg-my-yellow hover:text-white text-my-yellow ">Education</button>
                 <button className="font-heading text-purple-tag border pr-4 pl-4   rounded-xl border-purple-tag hover:bg-purple-tag hover:text-white ">IT</button>
 

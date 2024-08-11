@@ -15,22 +15,15 @@ import { jobListing } from "../../data/jobs";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const page = ({params}: {params: {id: string}}) => {
-    // const searchParams = useSearchParams();
-    // const data = searchParams.get("param");
-
-    // if (!params)
-    //     return <h1>Not Found</h1>
-
     const index = parseInt(params.id)
 
     if (index > jobListing.length)
         return <h1>Not Found</h1>
 
-    console.log('par', index, params)
     const jobPost = jobListing[index]
 
 
-    const colors = [['text-orange-tag', 'bg-orange-tag'], ['text-green-tag', 'bg-green-tag']];
+    const colors = ['orange', 'green'];
     
   return (
     <main className="md:grid grid-cols-4 p-8">
@@ -51,10 +44,18 @@ const page = ({params}: {params: {id: string}}) => {
                 <h1 className="font-bold pl-8 font-heading text-xl text-dark-blue">Ideal Candidate we want</h1>
                 
                     <ul className="ml-14 list-disc text-balance mt-2">
-                        <li className="font-body items-center text-base font-bold text-dark-blue mb-1">Young({jobPost.ideal_candidate.age}) {jobPost.ideal_candidate.gender} {jobPost.title}</li>
+                        
+                        <li className="font-body items-center text-base font-bold text-dark-blue mb-1">
+                             { jobPost.ideal_candidate.age === "Any" ? <span>{jobPost.ideal_candidate.age} age, </span> : <span>Young({jobPost.ideal_candidate.age})</span> } { " "}
+                             { jobPost.ideal_candidate.gender === "Any" ? <span> {jobPost.ideal_candidate.gender} gender </span> : jobPost.ideal_candidate.gender } { " "}
+                             {jobPost.title}
+                        </li>
                         { jobPost.ideal_candidate.traits.map((trait) => {
                             const trait_title = trait.split(":")
-                            return <li className="font-body font-normal text-base mb-1"><span className="font-bold text-dark-blue">{trait_title[0]}</span>: {trait_title[1]}</li>
+                            if(trait_title.length == 2){
+                                return <li className="font-body font-normal text-base mb-1"><span className="font-bold text-dark-blue">{trait_title[0]}</span>: {trait_title[1]}</li>
+                            }
+                            return <li className="font-body font-normal text-base mb-1">{trait_title[0]}</li>
                         })}
                     </ul>
                 
@@ -91,7 +92,7 @@ const page = ({params}: {params: {id: string}}) => {
                     {jobPost.about.categories.map((category, index) => {
                     const color = colors[index % colors.length];
 
-                    return <Tag text={color[0]} background={color[1]} name={category} />
+                    return <Tag primary={color}  name={category} />
                     
                     
                     })}
@@ -101,7 +102,7 @@ const page = ({params}: {params: {id: string}}) => {
                 <h2 className="font-bold font-heading text-xl text-dark-blue ">Required Skills</h2>
                 <div className="flex gap-2 mt-2 flex-wrap">
                     {jobPost.about.required_skills.map((skill) => {
-                        return <Tag text={"text-purple-tag"} background="bg-purple-tag" name={skill} />
+                        return <Tag primary={"purple"} name={skill} />
                     })}
                 </div>
             </div>

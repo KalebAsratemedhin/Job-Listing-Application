@@ -8,8 +8,8 @@ import Africa from "../assets/the-Africa-in-me.svg"
 
 const page = () => {
     const images = [image1, image2, tree, Africa]
-  return (
-    <main className="mx-28 my-20 ">
+  return ( 
+    <main className="pl-8 sm:pl-12 lg:pl-28 pr-10 sm:pr-20 lg:pr-72 py-16 ">
         <div className="flex justify-between">
             <hgroup>
                 <h1 className="font-black text-3xl font-heading text-dark-blue">Opportunities</h1>
@@ -28,7 +28,7 @@ const page = () => {
         </div>
 
         <section>
-            {jobListing.map((job, index) => <JobCard jobPost={job} pic={images[index % images.length]} />)}
+            {jobListing.map((job, index) => <JobCard jobPost={job} pic={images[index % images.length]} jobId={index} />)}
         </section>
     </main>
   )

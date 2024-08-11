@@ -7,7 +7,7 @@ import image from "../assets/image_2.svg"
 import Image from "next/image";
 import Tag from "./Tag";
 
-const JobCard = ({jobPost, pic}: {jobPost: JobPost, pic: string}) => {
+const JobCard = ({jobPost, pic, jobId}: {jobPost: JobPost, pic: string, jobId: number}) => {
     const titleTokens = jobPost.title.split(" ")
     const title = titleTokens.map(token => {
 
@@ -17,15 +17,14 @@ const JobCard = ({jobPost, pic}: {jobPost: JobPost, pic: string}) => {
 
     const router = useRouter()
     const handleClick = () => {
-        const queryString = new URLSearchParams(JSON.stringify(jobPost)).toString();
-        router.push(`/ApplicantDashboard?${queryString}` )
+        router.push(`/dashboard/${jobId}`);
         
-    }
+    }   
 
     
 
   return (
-    <div className="p-6 mt-7 border rounded-3xl bg-white grid grid-cols-10 hover:bg-gray-300" onClick={handleClick}>
+    <div className="p-6 mt-7 border rounded-3xl bg-white grid grid-cols-10 gap-2 hover:bg-gray-300" onClick={handleClick}>
         <div className="rounded-full col-span-1">
             <Image src={pic} alt="" width={60} height={60} /> 
         </div>

@@ -1,26 +1,40 @@
 "use client"
-import AboutTile from "../components/AboutTile";
-import JobCard from "../components/JobCard";
-import Tag from "../components/Tag";
+import AboutTile from "../../components/AboutTile";
+import JobCard from "../../components/JobCard";
+import Tag from "../../components/Tag";
 import Image from "next/image";
-import calendarCheckIcon from "../assets/calendar-check.svg";
-import calendarStartIcon from '../assets/calendar-start.svg'
-import greenCheckIcon from "../assets/green-check.svg"
-import locationIcon from "../assets/Icon-location.svg"
-import fireIcon from "../assets/fireIcon.svg"
-import plusIcon from '../assets/plus-circle.svg'
+import calendarCheckIcon from "../../assets/calendar-check.svg";
+import calendarStartIcon from '../../assets/calendar-start.svg'
+import greenCheckIcon from "../../assets/green-check.svg"
+import locationIcon from "../../assets/Icon-location.svg"
+import fireIcon from "../../assets/fireIcon.svg"
+import plusIcon from '../../assets/plus-circle.svg'
 
-import JobPost from "../models/JobPost";
-import { jobListing } from "../data/jobs";
+import JobPost from "../../models/JobPost";
+import { jobListing } from "../../data/jobs";
+import { useRouter, useSearchParams } from "next/navigation";
 
-const jobPost: JobPost = jobListing[0] 
+const page = ({params}: {params: {id: string}}) => {
+    // const searchParams = useSearchParams();
+    // const data = searchParams.get("param");
 
-const page = () => {
+    // if (!params)
+    //     return <h1>Not Found</h1>
+
+    const index = parseInt(params.id)
+
+    if (index > jobListing.length)
+        return <h1>Not Found</h1>
+
+    console.log('par', index, params)
+    const jobPost = jobListing[index]
+
+
     const colors = [['text-orange-tag', 'bg-orange-tag'], ['text-green-tag', 'bg-green-tag']];
-
+    
   return (
-    <main className="grid grid-cols-4">
-        <section className="col-span-3 pr-12 pt-8">
+    <main className="md:grid grid-cols-4 p-8">
+        <section className="col-span-3 pr-12 py-12">
             <div className="mb-8">
                 <h1 className="pl-8  mb-2 font-black font-heading text-xl text-dark-blue">Description</h1>
                 <div className="pl-8 text-dark-blue font-body text-base ">{jobPost.description}</div>
@@ -61,9 +75,9 @@ const page = () => {
             
         </section>
 
-        <aside className="col-span-1 pt-3 pr-6">
-            <div className="border-b-2 mb-3">
-                <h2 className="font-bold mb-4 font-heading text-xl text-dark-blue">About</h2>                
+        <aside className="col-span-1">
+            <div className="border-b-2 flex flex-col gap-3 mb-3">
+                <h2 className="font-bold mb-2 font-heading text-xl text-dark-blue">About</h2>                
                 
                 <AboutTile title="Posted On" value={jobPost.about.posted_on} icon={plusIcon}  />
                 <AboutTile title="Deadline" value={jobPost.about.deadline} icon={fireIcon} />
@@ -71,13 +85,10 @@ const page = () => {
                 <AboutTile title="Start Date" value={jobPost.about.start_date} icon={calendarStartIcon}/>
                 <AboutTile title="End Date" value={jobPost.about.end_date} icon={calendarCheckIcon} />
             </div>
-            <div className="border-b-2 mb-3 pb-4">
+            <div className="border-b-2 mt-3 mb-3 pb-4">
                 <h2 className="font-bold font-heading text-xl text-dark-blue">Categories</h2>
                 <div className="flex gap-4 mt-4">
                     {jobPost.about.categories.map((category, index) => {
-                    // return <div className={"rounded-full border px-4 border-yellow-100 "}>
-                    // {category}
-                    // </div>
                     const color = colors[index % colors.length];
 
                     return <Tag text={color[0]} background={color[1]} name={category} />
@@ -86,7 +97,7 @@ const page = () => {
                     })}
                 </div>
             </div>
-            <div>
+            <div className="mt-3">
                 <h2 className="font-bold font-heading text-xl text-dark-blue ">Required Skills</h2>
                 <div className="flex gap-2 mt-2 flex-wrap">
                     {jobPost.about.required_skills.map((skill) => {

@@ -1,135 +1,99 @@
-import { url } from "inspector";
+"use client"
 import AboutTile from "../components/AboutTile";
 import JobCard from "../components/JobCard";
+import Tag from "../components/Tag";
+import Image from "next/image";
+import calendarCheckIcon from "../assets/calendar-check.svg";
+import calendarStartIcon from '../assets/calendar-start.svg'
+import greenCheckIcon from "../assets/green-check.svg"
+import locationIcon from "../assets/Icon-location.svg"
+import fireIcon from "../assets/fireIcon.svg"
+import plusIcon from '../assets/plus-circle.svg'
 
-interface JobPost{
-    title: string;
-    description: string;
-    responsibilities: string[];
-    ideal_candidate: {
-        age: string;
-        gender: string;
-        traits: string[];
-    },
-    when_where: string;
-    about: {
-        posted_on: string;
-        deadline: string;
-        location: string;
-        start_date: string;
-        end_date: string;
-        categories: string[];
-        required_skills: string[];
-    },
-    company: string;
-    image: string;
+import JobPost from "../models/JobPost";
+import { jobListing } from "../data/jobs";
 
-}
-
-const jobPost: JobPost = JSON.parse(
-    `{"title": "Social media manager",
-    "description": "As a Social Media Assistant, you will work closely with the social media manager or marketing team to execute social media strategies and campaigns. You will be responsible for assisting in the creation and scheduling of engaging content, monitoring social media channels, and interacting with followers. Your primary goal will be to enhance brand visibility, foster positive relationships with the audience, and drive engagement and conversions.",
-    "responsibilities": [
-      "Community engagement to ensure that is supported and actively represented online",
-      "Focus on social media content development and publication",
-      "Marketing and strategy support",
-      "Stay on top of trends on social media platforms, and suggest content ideas to the team",
-      "Engage with online communities"
-    ],
-    "ideal_candidate": {
-      "age": "18-24",
-      "gender": "Female",
-      "traits": [
-        "Passionate & Reliable: Genuine interest in our mission and a strong desire to make a positive impact, responsible, and committed to fulfilling volunteer commitments.",
-        "Adaptable, Team Player & Strong Communication Skills: Able to work effectively in diverse teams; and contributes positively. Flexible and open to embracing new challenges and shifting priorities; Clear verbal and written communication, active listening, and constructive feedback.",
-        "Respectful: Embraces diversity, inclusive, and treats others with respect. Abides with all our rules and regulations."
-      ]
-    },
-    "when_where": "The onboarding event for this event will take place on Jan 18th, 2023 in AAU Auditorium.",
-    "about": {
-      "posted_on": "Jul 1, 2023",
-      "deadline": "Jul 31, 2023",
-      "location": "Addis Ababa",
-      "start_date": "Aug 02, 2023",
-      "end_date": "Sep 02, 2023",
-      "categories": ["Marketing", "Design"],
-      "required_skills": ["Social Media Marketing", "English", "Copywriting"]
-    },
-    "company": "ABC Media",
-    "image": "/job1.png" }
-  `
-);
-
-
+const jobPost: JobPost = jobListing[0] 
 
 const page = () => {
+    const colors = [['text-orange-tag', 'bg-orange-tag'], ['text-green-tag', 'bg-green-tag']];
 
   return (
-    <main className="grid grid-cols-6">
-        <section className="col-span-5 pr-12 pt-8">
+    <main className="grid grid-cols-4">
+        <section className="col-span-3 pr-12 pt-8">
             <div className="mb-8">
-                <h1 className="font-bold pl-4">Description</h1>
-                <div className="pl-6">{jobPost.description}</div>
+                <h1 className="pl-8  mb-2 font-black font-heading text-xl text-dark-blue">Description</h1>
+                <div className="pl-8 text-dark-blue font-body text-base ">{jobPost.description}</div>
             </div>
             <div className="mb-8">
-                <h1 className="font-bold pl-4">Responsibilities</h1>
+                <h1 className="font-bold pl-8 font-heading text-xl text-dark-blue">Responsibilities</h1>
                 {
                     jobPost.responsibilities.map((responsibility) => {
-                        return <li className="pl-6">{responsibility}</li>
+                        return <li className="pl-8 list-none flex my-3 text-dark-blue font-body text-base" > <span ><Image className="flex items-center mr-2" src={greenCheckIcon} alt="check-icon" /></span> {responsibility}</li>
                     })
                 }
             </div>
             <div className="mb-8">
-                <h1 className="font-bold pl-4">Ideal Candidate we want</h1>
-
-                {/* <ul> */}
-                    <li className="pl-6 font-bold">Young({jobPost.ideal_candidate.age}) {jobPost.ideal_candidate.gender} {jobPost.title}</li>
-                    { jobPost.ideal_candidate.traits.map((trait) => {
-                        const trait_title = trait.split(":")
-                        return <li className="pl-6"><span className="font-bold">{trait_title[0]}</span>: {trait_title[1]}</li>
-                    })}
-                {/* </ul> */}
+                <h1 className="font-bold pl-8 font-heading text-xl text-dark-blue">Ideal Candidate we want</h1>
+                
+                    <ul className="ml-14 list-disc text-balance mt-2">
+                        <li className="font-body items-center text-base font-bold text-dark-blue mb-1">Young({jobPost.ideal_candidate.age}) {jobPost.ideal_candidate.gender} {jobPost.title}</li>
+                        { jobPost.ideal_candidate.traits.map((trait) => {
+                            const trait_title = trait.split(":")
+                            return <li className="font-body font-normal text-base mb-1"><span className="font-bold text-dark-blue">{trait_title[0]}</span>: {trait_title[1]}</li>
+                        })}
+                    </ul>
+                
 
                 <div>
 
                 </div>
             </div>
             <div className="mb-8">
-                <h1 className="font-bold pl-4">When & where</h1>
-                <p className="pl-6">{jobPost.when_where}</p>
+                <h1 className="font-bold pl-8 font-heading text-xl text-dark-blue">When & where</h1>
+                <div className="pl-6 font-body font-normal text-base flex items-center gap-4 mt-2"> 
+                    <div className=" w-10 h-10 flex justify-center items-center border  rounded-3xl bg-white">
+                        <Image src={locationIcon} alt="icon"  />
+                    </div>
+                     {jobPost.when_where}
+                </div>
             </div>
-            <JobCard jobPost={jobPost} />
+            
         </section>
 
         <aside className="col-span-1 pt-3 pr-6">
             <div className="border-b-2 mb-3">
-                <h2 className="font-bold mb-4 ">About</h2>
+                <h2 className="font-bold mb-4 font-heading text-xl text-dark-blue">About</h2>                
                 
-
-                <AboutTile title="Posted On" value={jobPost.about.posted_on} icon={'http://www.w3.org/2000/svg'}  />
-                <AboutTile title="Deadline" value={jobPost.about.deadline} icon={'http://placeholder'}  />
-                <AboutTile title="Location" value={jobPost.about.location} icon={'http://placeholder'}  />
-                <AboutTile title="Start Date" value={jobPost.about.start_date} icon={'http://placeholder'}  />
-                <AboutTile title="End Date" value={jobPost.about.end_date} icon={'http://placeholder'}  />
-                
+                <AboutTile title="Posted On" value={jobPost.about.posted_on} icon={plusIcon}  />
+                <AboutTile title="Deadline" value={jobPost.about.deadline} icon={fireIcon} />
+                <AboutTile title="Location" value={jobPost.about.location} icon={locationIcon} />
+                <AboutTile title="Start Date" value={jobPost.about.start_date} icon={calendarStartIcon}/>
+                <AboutTile title="End Date" value={jobPost.about.end_date} icon={calendarCheckIcon} />
             </div>
             <div className="border-b-2 mb-3 pb-4">
-                <h2 className="font-bold ">Categories</h2>
-                <div className="flex gap-2">
-                    {jobPost.about.categories.map((category) => {
-                        return <div>{category}</div>
+                <h2 className="font-bold font-heading text-xl text-dark-blue">Categories</h2>
+                <div className="flex gap-4 mt-4">
+                    {jobPost.about.categories.map((category, index) => {
+                    // return <div className={"rounded-full border px-4 border-yellow-100 "}>
+                    // {category}
+                    // </div>
+                    const color = colors[index % colors.length];
+
+                    return <Tag text={color[0]} background={color[1]} name={category} />
+                    
+                    
                     })}
                 </div>
             </div>
             <div>
-                <h2 className="font-bold ">Required Skills</h2>
-                <div className="flex gap-4 flex-wrap">
+                <h2 className="font-bold font-heading text-xl text-dark-blue ">Required Skills</h2>
+                <div className="flex gap-2 mt-2 flex-wrap">
                     {jobPost.about.required_skills.map((skill) => {
-                        return <div>{skill}</div>
+                        return <Tag text={"text-purple-tag"} background="bg-purple-tag" name={skill} />
                     })}
                 </div>
             </div>
-            
         </aside>
     </main>
   )

@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import React, { ReactNode } from "react";
 interface Props{
     title: string;
     value: string;
@@ -9,13 +10,13 @@ interface Props{
 
 const AboutTile = ({title, value, icon}: Props) => {
   return (
-    <div className="flex mb-2">
-        <img src={icon} alt="icon" />
-        {/* <Image src={icon} alt="icon" width={50} height={50}/> */}
-        <link type="image/png" sizes="16x16" rel="icon" href=".../icons8-add-16.png"></link>
+    <div className="flex mb-2 items-center">
+        <div className=" w-10 h-10 flex justify-center items-center border  rounded-3xl bg-white">
+          <Image src={icon} alt="icon"  />
+        </div>
         <div className="flex flex-col ml-4">
-          <p>{title}</p>
-          <p className="font-bold">{value}</p>
+          <p className="font-normal font-body  text-dark-blue">{title}</p>
+          <p className="font-semibold font-body text-dark-blue">{value}</p>
         </div>
 
     </div>

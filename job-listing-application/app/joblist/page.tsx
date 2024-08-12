@@ -28,7 +28,7 @@ const page = () => {
         </div>
 
         <section>
-            {jobListing.map((job, index) => <JobCard jobPost={job} pic={images[index % images.length]} jobId={index} />)}
+            {jobListing.map((job, index) => <JobCard key={index} jobPost={job} pic={images[index % images.length]} jobId={index} />)}
         </section>
     </main>
   )

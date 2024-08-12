@@ -31,7 +31,7 @@ const JobCard = ({jobPost, pic, jobId}: {jobPost: JobPost, pic: string, jobId: n
         <div className="col-span-9">
            
             <div className="mb-2">
-                <h1 className="fon-body text-dark-blue">{ title}</h1>
+                <h1 className="font-body text-dark-blue">{ title}</h1>
                 <h2 className="text-grey-subtitle font-body">{jobPost.company} <span className="text-gray-500 text-2xl relative bottom-1 ">.</span> {jobPost.about.location}</h2>
             </div>
             <div>
@@ -40,7 +40,7 @@ const JobCard = ({jobPost, pic, jobId}: {jobPost: JobPost, pic: string, jobId: n
                 </p>
             </div>
             <div className="mt-4 flex gap-2">
-                <div className="border-r-2 pr-3"><Tag primary="green" name="In Person" /></div>
+                <div className="border-r-2 pr-3"><Tag text="text-green-tag" bg="bg-green-tag" name="In Person" /></div>
                 <button className="font-heading rounded-full border px-4 border-my-yellow  hover:bg-my-yellow hover:text-white text-my-yellow ">Education</button>
                 <button className="font-heading text-purple-tag border pr-4 pl-4   rounded-xl border-purple-tag hover:bg-purple-tag hover:text-white ">IT</button>
 

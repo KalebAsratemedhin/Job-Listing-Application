@@ -1,6 +1,5 @@
 "use client"
 import AboutTile from "../../components/AboutTile";
-import JobCard from "../../components/JobCard";
 import Tag from "../../components/Tag";
 import Image from "next/image";
 import calendarCheckIcon from "../../assets/calendar-check.svg";
@@ -10,9 +9,7 @@ import locationIcon from "../../assets/Icon-location.svg"
 import fireIcon from "../../assets/fireIcon.svg"
 import plusIcon from '../../assets/plus-circle.svg'
 
-import JobPost from "../../models/JobPost";
 import { jobListing } from "../../data/jobs";
-import { useRouter, useSearchParams } from "next/navigation";
 
 const page = ({params}: {params: {id: string}}) => {
     const index = parseInt(params.id)
@@ -23,7 +20,7 @@ const page = ({params}: {params: {id: string}}) => {
     const jobPost = jobListing[index]
 
 
-    const colors = ['orange', 'green'];
+    const colors = [['text-orange-tag', 'bg-orange-tag'], ['text-green-tag', 'bg-green-tag']];
     
   return (
     <main className="md:grid grid-cols-4 p-8">
@@ -35,8 +32,8 @@ const page = ({params}: {params: {id: string}}) => {
             <div className="mb-8">
                 <h1 className="font-bold pl-8 font-heading text-xl text-dark-blue">Responsibilities</h1>
                 {
-                    jobPost.responsibilities.map((responsibility) => {
-                        return <li className="pl-8 list-none flex my-3 text-dark-blue font-body text-base" > <span ><Image className="flex items-center mr-2" src={greenCheckIcon} alt="check-icon" /></span> {responsibility}</li>
+                    jobPost.responsibilities.map((responsibility, index) => {
+                        return <li key={index} className="pl-8 list-none flex my-3 text-dark-blue font-body text-base" > <span ><Image className="flex items-center mr-2" src={greenCheckIcon} alt="check-icon" /></span> {responsibility}</li>
                     })
                 }
             </div>
@@ -92,7 +89,7 @@ const page = ({params}: {params: {id: string}}) => {
                     {jobPost.about.categories.map((category, index) => {
                     const color = colors[index % colors.length];
 
-                    return <Tag primary={color}  name={category} />
+                    return <Tag key={index} text={color[0]} bg={color[1]}  name={category} />
                     
                     
                     })}
@@ -101,8 +98,8 @@ const page = ({params}: {params: {id: string}}) => {
             <div className="mt-3">
                 <h2 className="font-bold font-heading text-xl text-dark-blue ">Required Skills</h2>
                 <div className="flex gap-2 mt-2 flex-wrap">
-                    {jobPost.about.required_skills.map((skill) => {
-                        return <Tag primary={"purple"} name={skill} />
+                    {jobPost.about.required_skills.map((skill, index) => {
+                        return <Tag key={index} text={"text-purple-tag"} bg="bg-purple-tag" name={skill} />
                     })}
                 </div>
             </div>

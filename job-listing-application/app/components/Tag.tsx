@@ -1,9 +1,8 @@
 
-const Tag = ({primary, name}: {primary: string, name: string}) => {
-  const textColor = `text-${primary}-tag`
-  const bgColor = `bg-${primary}-tag`
+const Tag = ({text, bg, name}: {text: string, bg: string, name: string}) => {
+  
   return (
-    <div className={`rounded-full border-transparent px-4 py-1 ${textColor} ${bgColor} bg-opacity-10`}>
+    <div className={`rounded-full border-transparent px-4 py-1 ${text} ${bg} bg-opacity-10`}>
         {name}
     </div>
   )

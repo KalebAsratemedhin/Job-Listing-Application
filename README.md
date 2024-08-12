@@ -9,7 +9,7 @@ The app enables users to view detailed information about each job, including job
 
 1. Clone the repo
 ``` 
-git clone https://github.com/KalebAsratemedhin/https://github.com/KalebAsratemedhin/Job-Listing-Application.git
+git clone https://github.com/KalebAsratemedhin/Job-Listing-Application.git
 cd job-listing-application
 ```
 2. Install dependencies
